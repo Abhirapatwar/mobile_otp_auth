@@ -9,15 +9,19 @@ function App() {
   const [otp, setOtp] = useState("");
   const [confirmObj, setConfirmObj] = useState("");
 
+  // storing the mobile number 
   const handleInput = (e) => {
     e.preventDefault();
     setMobile(e.target.value);
   };
+
+  // storing the otp number 
   const handleOtpInput = (e) => {
     e.preventDefault();
     setOtp(e.target.value);
   };
 
+  // setting up recaptchaVerifier
   const setUpRecaptcha = async (number) => {
     const recaptchaVerifier = new RecaptchaVerifier(
       "recaptcha-container",
@@ -28,6 +32,7 @@ function App() {
     return signInWithPhoneNumber(auth, number, recaptchaVerifier);
   };
 
+  //sending the otp to phone number and storing the response of setUpRecaptcha method to further verify the otp
   const onSignInSubmit = async (e) => {
     e.preventDefault();
     const phoneNumber = "+91" + mobile;
@@ -41,6 +46,7 @@ function App() {
     }
   };
 
+  //verifying the otp after input
   const verifyOtp = async (e) => {
     e.preventDefault();
     try {
